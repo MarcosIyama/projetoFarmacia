@@ -21,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.generation.crud_farmacia.model.Produto;
 import com.generation.crud_farmacia.repository.CategoriaRepository;
 import com.generation.crud_farmacia.repository.ProdutoRepository;
+import com.generation.crud_farmacia.service.ProdutoService;
 
 import jakarta.validation.Valid;
 
@@ -35,6 +36,9 @@ public class ProdutoController {
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
+	@Autowired
+    private ProdutoService produtoService;
+	
 	@GetMapping
 	public ResponseEntity<List<Produto>> getAll() {
 		return ResponseEntity.ok(produtoRepository.findAll());
@@ -88,5 +92,18 @@ public class ProdutoController {
         produtoRepository.deleteById(id);
     }
 	
+	// Endpoint para ativar a disponibilidade de um produto
+    @PutMapping("/{id}/ativar")
+    public ResponseEntity<Produto> ativarProduto(@PathVariable Long id) {
+        Produto produto = produtoService.ativarProduto(id);
+        return ResponseEntity.ok(produto);
+    }
+
+    // Endpoint para desativar a disponibilidade de um produto
+    @PutMapping("/{id}/desativar")
+    public ResponseEntity<Produto> desativarProduto(@PathVariable Long id) {
+        Produto produto = produtoService.desativarProduto(id);
+        return ResponseEntity.ok(produto);
+    }
 	
 }

@@ -30,6 +30,8 @@ public class Produto {
 	
 	private String datavalidade;
 	
+	private boolean disponivel;
+	
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Usuario usuario;
@@ -76,6 +78,30 @@ public class Produto {
 
 	public void setDatavalidade(String datavalidade) {
 		this.datavalidade = datavalidade;
+	}
+
+	public boolean isDisponivel() {
+		return disponivel;
+	}
+
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
+	}
+	
+	public void ativarDisponivel() {
+        this.disponivel = true;
+    }
+
+    public void desativarDisponivel() {
+        this.disponivel = false;
+    }
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Categoria getCategoria() {
